@@ -68,143 +68,129 @@ class UpdatesModule : Module(), IUpdatesEventManagerObserver {
     }
 
     AsyncFunction("reload") { promise: Promise ->
-      UpdatesController.instance.relaunchReactApplicationForModule(
-        object : IUpdatesController.ModuleCallback<Unit> {
-          override fun onSuccess(result: Unit) {
-            promise.resolve(null)
-          }
-
-          override fun onFailure(exception: CodedException) {
-            promise.reject(exception)
-          }
+      moduleScope.launch {
+        runCatching {
+          UpdatesController.instance.relaunchReactApplicationForModule()
+          promise.resolve()
+        }.onFailure {
+          it.printStackTrace()
         }
-      )
+      }
     }
 
     AsyncFunction("checkForUpdateAsync") { promise: Promise ->
-      UpdatesController.instance.checkForUpdate(
-        object : IUpdatesController.ModuleCallback<IUpdatesController.CheckForUpdateResult> {
-          override fun onSuccess(result: IUpdatesController.CheckForUpdateResult) {
-            when (result) {
-              is IUpdatesController.CheckForUpdateResult.ErrorResult -> {
-                promise.reject("ERR_UPDATES_CHECK", "Failed to check for update", result.error)
-              }
+      moduleScope.launch {
+        runCatching {
+          when (val result = UpdatesController.instance.checkForUpdate()) {
+            is IUpdatesController.CheckForUpdateResult.ErrorResult -> {
+              promise.reject("ERR_UPDATES_CHECK", "Failed to check for update", result.error)
+            }
 
-              is IUpdatesController.CheckForUpdateResult.NoUpdateAvailable -> {
-                promise.resolve(
-                  Bundle().apply {
-                    putBoolean("isRollBackToEmbedded", false)
-                    putBoolean("isAvailable", false)
-                    putString("reason", result.reason.value)
-                  }
-                )
-              }
+            is IUpdatesController.CheckForUpdateResult.NoUpdateAvailable -> {
+              promise.resolve(
+                Bundle().apply {
+                  putBoolean("isRollBackToEmbedded", false)
+                  putBoolean("isAvailable", false)
+                  putString("reason", result.reason.value)
+                }
+              )
+            }
 
-              is IUpdatesController.CheckForUpdateResult.RollBackToEmbedded -> {
-                promise.resolve(
-                  Bundle().apply {
-                    putBoolean("isRollBackToEmbedded", true)
-                    putBoolean("isAvailable", false)
-                  }
-                )
-              }
+            is IUpdatesController.CheckForUpdateResult.RollBackToEmbedded -> {
+              promise.resolve(
+                Bundle().apply {
+                  putBoolean("isRollBackToEmbedded", true)
+                  putBoolean("isAvailable", false)
+                }
+              )
+            }
 
-              is IUpdatesController.CheckForUpdateResult.UpdateAvailable -> {
-                promise.resolve(
-                  Bundle().apply {
-                    putBoolean("isRollBackToEmbedded", false)
-                    putBoolean("isAvailable", true)
-                    putString(
-                      "manifestString",
-                      result.update.manifest.toString()
-                    )
-                  }
-                )
-              }
+            is IUpdatesController.CheckForUpdateResult.UpdateAvailable -> {
+              promise.resolve(
+                Bundle().apply {
+                  putBoolean("isRollBackToEmbedded", false)
+                  putBoolean("isAvailable", true)
+                  putString(
+                    "manifestString",
+                    result.update.manifest.toString()
+                  )
+                }
+              )
             }
           }
-
-          override fun onFailure(exception: CodedException) {
-            promise.reject(exception)
-          }
+        }.onFailure {
+          promise.reject(it as CodedException)
         }
-      )
+      }
     }
 
     AsyncFunction("fetchUpdateAsync") { promise: Promise ->
-      UpdatesController.instance.fetchUpdate(
-        object : IUpdatesController.ModuleCallback<IUpdatesController.FetchUpdateResult> {
-          override fun onSuccess(result: IUpdatesController.FetchUpdateResult) {
-            when (result) {
-              is IUpdatesController.FetchUpdateResult.ErrorResult -> {
-                promise.reject("ERR_UPDATES_FETCH", "Failed to download new update", result.error)
-              }
+      moduleScope.launch {
+        runCatching {
+          when (val result = UpdatesController.instance.fetchUpdate()) {
+            is IUpdatesController.FetchUpdateResult.ErrorResult -> {
+              promise.reject("ERR_UPDATES_FETCH", "Failed to download new update", result.error)
+            }
 
-              is IUpdatesController.FetchUpdateResult.Failure -> {
-                promise.resolve(
-                  Bundle().apply {
-                    putBoolean("isRollBackToEmbedded", false)
-                    putBoolean("isNew", false)
-                  }
-                )
-              }
+            is IUpdatesController.FetchUpdateResult.Failure -> {
+              promise.resolve(
+                Bundle().apply {
+                  putBoolean("isRollBackToEmbedded", false)
+                  putBoolean("isNew", false)
+                }
+              )
+            }
 
-              is IUpdatesController.FetchUpdateResult.RollBackToEmbedded -> {
-                promise.resolve(
-                  Bundle().apply {
-                    putBoolean("isRollBackToEmbedded", true)
-                    putBoolean("isNew", false)
-                  }
-                )
-              }
+            is IUpdatesController.FetchUpdateResult.RollBackToEmbedded -> {
+              promise.resolve(
+                Bundle().apply {
+                  putBoolean("isRollBackToEmbedded", true)
+                  putBoolean("isNew", false)
+                }
+              )
+            }
 
-              is IUpdatesController.FetchUpdateResult.Success -> {
-                promise.resolve(
-                  Bundle().apply {
-                    putBoolean("isRollBackToEmbedded", false)
-                    putBoolean("isNew", true)
-                    putString("manifestString", result.update.manifest.toString())
-                  }
-                )
-              }
+            is IUpdatesController.FetchUpdateResult.Success -> {
+              promise.resolve(
+                Bundle().apply {
+                  putBoolean("isRollBackToEmbedded", false)
+                  putBoolean("isNew", true)
+                  putString("manifestString", result.update.manifest.toString())
+                }
+              )
             }
           }
-
-          override fun onFailure(exception: CodedException) {
-            promise.reject(exception)
-          }
+        }.onFailure {
+          promise.reject(it as CodedException)
         }
-      )
+      }
     }
 
     AsyncFunction("getExtraParamsAsync") { promise: Promise ->
       logger.debug("Called getExtraParamsAsync")
-      UpdatesController.instance.getExtraParams(object : IUpdatesController.ModuleCallback<Bundle> {
-        override fun onSuccess(result: Bundle) {
+      moduleScope.launch {
+        runCatching {
+          val result = UpdatesController.instance.getExtraParams()
           promise.resolve(result)
+        }.onFailure {
+          promise.reject(it as CodedException)
         }
-
-        override fun onFailure(exception: CodedException) {
-          promise.reject(exception)
-        }
-      })
+      }
     }
 
     AsyncFunction("setExtraParamAsync") { key: String, value: String?, promise: Promise ->
-      logger.debug("Called setExtraParamAsync with key = $key, value = $value")
-      UpdatesController.instance.setExtraParam(
-        key,
-        value,
-        object : IUpdatesController.ModuleCallback<Unit> {
-          override fun onSuccess(result: Unit) {
-            promise.resolve(null)
-          }
-
-          override fun onFailure(exception: CodedException) {
-            promise.reject(exception)
-          }
+      moduleScope.launch {
+        logger.debug("Called setExtraParamAsync with key = $key, value = $value")
+        runCatching {
+          UpdatesController.instance.setExtraParam(
+            key,
+            value
+          )
+          promise.resolve()
+        }.onFailure {
+          promise.reject(it as CodedException)
         }
-      )
+      }
     }
 
     AsyncFunction("readLogEntriesAsync") Coroutine { maxAge: Long ->
@@ -243,30 +229,31 @@ class UpdatesModule : Module(), IUpdatesEventManagerObserver {
   companion object {
     private val TAG = UpdatesModule::class.java.simpleName
 
-    internal suspend fun readLogEntries(filesDirectory: File, maxAge: Long) = withContext(Dispatchers.IO) {
-      val reader = UpdatesLogReader(filesDirectory)
-      val date = Date()
-      val epoch = Date(date.time - maxAge)
-      reader.getLogEntries(epoch)
-        .mapNotNull { UpdatesLogEntry.create(it) }
-        .map { entry ->
-          Bundle().apply {
-            putLong("timestamp", entry.timestamp)
-            putString("message", entry.message)
-            putString("code", entry.code)
-            putString("level", entry.level)
-            if (entry.updateId != null) {
-              putString("updateId", entry.updateId)
-            }
-            if (entry.assetId != null) {
-              putString("assetId", entry.assetId)
-            }
-            if (entry.stacktrace != null) {
-              putStringArray("stacktrace", entry.stacktrace.toTypedArray())
+    internal suspend fun readLogEntries(filesDirectory: File, maxAge: Long) =
+      withContext(Dispatchers.IO) {
+        val reader = UpdatesLogReader(filesDirectory)
+        val date = Date()
+        val epoch = Date(date.time - maxAge)
+        reader.getLogEntries(epoch)
+          .mapNotNull { UpdatesLogEntry.create(it) }
+          .map { entry ->
+            Bundle().apply {
+              putLong("timestamp", entry.timestamp)
+              putString("message", entry.message)
+              putString("code", entry.code)
+              putString("level", entry.level)
+              if (entry.updateId != null) {
+                putString("updateId", entry.updateId)
+              }
+              if (entry.assetId != null) {
+                putString("assetId", entry.assetId)
+              }
+              if (entry.stacktrace != null) {
+                putStringArray("stacktrace", entry.stacktrace.toTypedArray())
+              }
             }
           }
-        }
-    }
+      }
 
     internal suspend fun clearLogEntries(filesDirectory: File, completionHandler: (_: Exception?) -> Unit) {
       val reader = UpdatesLogReader(filesDirectory)
