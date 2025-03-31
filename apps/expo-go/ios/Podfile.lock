@@ -385,7 +385,7 @@ PODS:
     - PromisesSwift (~> 2.1)
   - fmt (11.0.2)
   - glog (0.3.5)
-  - Google-Maps-iOS-Utils (6.0.0):
+  - Google-Maps-iOS-Utils (6.1.0):
     - GoogleMaps (~> 9.0)
   - GoogleAppMeasurement (11.4.0):
     - GoogleAppMeasurement/AdIdSupport (= 11.4.0)
@@ -410,11 +410,9 @@ PODS:
   - GoogleDataTransport (10.1.0):
     - nanopb (~> 3.30910.0)
     - PromisesObjC (~> 2.4)
-  - GoogleMaps (9.1.1):
-    - GoogleMaps/Maps (= 9.1.1)
-  - GoogleMaps/Base (9.1.1)
-  - GoogleMaps/Maps (9.1.1):
-    - GoogleMaps/Base
+  - GoogleMaps (9.3.0):
+    - GoogleMaps/Maps (= 9.3.0)
+  - GoogleMaps/Maps (9.3.0)
   - GoogleUtilities (8.0.2):
     - GoogleUtilities/AppDelegateSwizzler (= 8.0.2)
     - GoogleUtilities/Environment (= 8.0.2)
@@ -1851,8 +1849,56 @@ PODS:
     - React-jsiexecutor
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
-  - react-native-maps (1.20.1):
+  - react-native-google-maps (1.21.0-alpha.112):
+    - DoubleConversion
+    - glog
+    - Google-Maps-iOS-Utils (= 6.1.0)
+    - GoogleMaps (= 9.3.0)
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
     - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-hermes
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
+  - react-native-maps (1.21.0-alpha.112):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-hermes
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - react-native-netinfo (11.4.1):
     - React-Core
   - react-native-pager-view (6.7.0):
@@ -2916,7 +2962,7 @@ DEPENDENCIES:
   - glog (from `../../../react-native-lab/react-native/packages/react-native/third-party-podspecs/glog.podspec`)
   - Google-Maps-iOS-Utils (from `https://github.com/googlemaps/google-maps-ios-utils.git`)
   - GoogleDataTransport
-  - GoogleMaps (~> 9.0)
+  - GoogleMaps (~> 9.3)
   - GoogleUtilities
   - hermes-engine (from `../../../react-native-lab/react-native/packages/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - JKBigInteger (from `vendored/common/JKBigInteger.podspec.json`)
@@ -2957,6 +3003,7 @@ DEPENDENCIES:
   - React-logger (from `../../../react-native-lab/react-native/packages/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../../../react-native-lab/react-native/packages/react-native/ReactCommon`)
   - React-microtasksnativemodule (from `../../../react-native-lab/react-native/packages/react-native/ReactCommon/react/nativemodule/microtasks`)
+  - react-native-google-maps (from `../../../node_modules/react-native-maps`)
   - react-native-maps (from `../../../node_modules/react-native-maps`)
   - "react-native-netinfo (from `../../../node_modules/@react-native-community/netinfo`)"
   - react-native-pager-view (from `../../../node_modules/react-native-pager-view`)
@@ -3270,6 +3317,8 @@ EXTERNAL SOURCES:
     :path: "../../../react-native-lab/react-native/packages/react-native/ReactCommon"
   React-microtasksnativemodule:
     :path: "../../../react-native-lab/react-native/packages/react-native/ReactCommon/react/nativemodule/microtasks"
+  react-native-google-maps:
+    :path: "../../../node_modules/react-native-maps"
   react-native-maps:
     :path: "../../../node_modules/react-native-maps"
   react-native-netinfo:
@@ -3377,7 +3426,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Google-Maps-iOS-Utils:
-    :commit: 3b4711914d6b79e5800d8470a4f7f402896ec049
+    :commit: bfb8c49dcfda8d038f3669300b5bdfbbac9ed329
     :git: https://github.com/googlemaps/google-maps-ios-utils.git
 
 SPEC CHECKSUMS:
@@ -3462,12 +3511,12 @@ SPEC CHECKSUMS:
   FirebaseSessions: 655ff17f3cc1a635cbdc2d69b953878001f9e25b
   fmt: a40bb5bd0294ea969aaaba240a927bd33d878cdd
   glog: 08b301085f15bcbb6ff8632a8ebaf239aae04e6a
-  Google-Maps-iOS-Utils: cfe6a0239c7ca634b7e001ad059a6707143dc8dc
+  Google-Maps-iOS-Utils: 0a484b05ed21d88c9f9ebbacb007956edd508a96
   GoogleAppMeasurement: 987769c4ca6b968f2479fbcc9fe3ce34af454b8e
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
-  GoogleMaps: 80ea184ed6bf44139f383a8b0e248ba3ec1cc8c9
+  GoogleMaps: b58e9627004f47043897eeae830c3ef023678f3b
   GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
-  hermes-engine: 197827f1ec648b53dcdc503d7a1b3a7644f9b4cb
+  hermes-engine: b582c44eb901463ed655200759977d79b91ab8bd
   JKBigInteger: 5c72131974815e969c0782c41e3452f1bbe5619f
   libavif: 84bbb62fb232c3018d6f1bab79beea87e35de7b7
   libdav1d: 23581a4d8ec811ff171ed5e2e05cd27bad64c39f
@@ -3513,7 +3562,8 @@ SPEC CHECKSUMS:
   React-logger: 0de8a4004273f62f6296d0c3b8c120c2245eaf81
   React-Mapbuffer: b4708d8976588eeda6dacfa14742b1f2056e5bb6
   React-microtasksnativemodule: 9d28b4b9272b52dffabcd2d48a934a8d8177f1e6
-  react-native-maps: ee1e65647460c3d41e778071be5eda10e3da6225
+  react-native-google-maps: 9ca1c1efce2340a7053691b5d012e66c18a91ebd
+  react-native-maps: cd5b0f9effdd06dabc7b6cfb35721f111630986d
   react-native-netinfo: f0a9899081c185db1de5bb2fdc1c88c202a059ac
   react-native-pager-view: b7f8cf921e19063a3528ee2aeae945bb42104dbd
   react-native-safe-area-context: 55dbcf556a51092ddf163b29febbc07dc7f14ebb
@@ -3580,6 +3630,6 @@ SPEC CHECKSUMS:
   Yoga: 99c3ff1f0452d13c8774222903cef8dda229d5ce
   ZXingObjC: 8898711ab495761b2dbbdec76d90164a6d7e14c5
 
-PODFILE CHECKSUM: 5f7b4e32a1787fd68d6e93c79d9857af55969f4a
+PODFILE CHECKSUM: 5292375dc558fc07e4dce20960d842618c35e4b3
 
 COCOAPODS: 1.16.2

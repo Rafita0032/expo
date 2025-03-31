@@ -13089,10 +13089,10 @@ react-native-keyboard-aware-scroll-view@^0.9.5:
     prop-types "^15.6.2"
     react-native-iphone-x-helper "^1.0.3"
 
-react-native-maps@1.20.1:
-  version "1.20.1"
-  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-1.20.1.tgz#f613364886b2f72db56cafcd2bd7d3a35f470dfb"
-  integrity sha512-NZI3B5Z6kxAb8gzb2Wxzu/+P2SlFIg1waHGIpQmazDSCRkNoHNY4g96g+xS0QPSaG/9xRBbDNnd2f2/OW6t6LQ==
+react-native-maps@1.21.0-alpha.112:
+  version "1.21.0-alpha.112"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-1.21.0-alpha.112.tgz#6001898648222bbae3863842b0870ca522cb4bcc"
+  integrity sha512-HS1pB5O+/MDp0Y6+zZmJO5/C/GCvWp5Adu9BliNqV4AiGOiKq9p8Up7zuQt3Bfp0wYr220y3bFY7c20KecAeDg==
   dependencies:
     "@types/geojson" "^7946.0.13"
 
@@ -13137,6 +13137,14 @@ react-native-screens@4.10.0:
   version "4.10.0"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-4.10.0.tgz#40634aead590c6b7034ded6a9f92465d1d611906"
   integrity sha512-Tw21NGuXm3PbiUGtZd0AnXirUixaAbPXDjNR0baBH7/WJDaDTTELLcQ7QRXuqAWbmr/EVCrKj1348ei1KFIr8A==
+  dependencies:
+    react-freeze "^1.0.0"
+    warn-once "^0.1.0"
+
+react-native-screens@4.9.2:
+  version "4.9.2"
+  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-4.9.2.tgz#40bb8a405997414e1258b51175662880f8588397"
+  integrity sha512-87gR7XRIirACYxtYltEl1BbUo5r0W4AFPckUDDzATAN6LIUZ2PC3bX6UAFeoEBEqBbfaemRZTWSYHl6MCZFSgw==
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
