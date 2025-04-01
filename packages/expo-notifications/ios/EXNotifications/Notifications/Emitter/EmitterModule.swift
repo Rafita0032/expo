@@ -8,7 +8,7 @@ let onDidReceiveNotification = "onDidReceiveNotification"
 let onDidReceiveNotificationResponse = "onDidReceiveNotificationResponse"
 let onDidClearNotificationResponse = "onDidClearNotificationResponse"
 
-open class EmitterModule: Module, NotificationDelegate {
+open class EmitterModule: Module, NotificationDelegate, ExpoGoNotificationsModule {
   public func definition() -> ModuleDefinition {
     Name("ExpoNotificationsEmitter")
 
@@ -55,5 +55,12 @@ open class EmitterModule: Module, NotificationDelegate {
     self.sendEvent(onDidReceiveNotification, serializedNotification as [String: Any])
     completionHandler([])
     return true
+  }
+
+  // MARK: - ExpoGoNotificationsModule protocol
+  private var scopeKey: String?
+
+  public func setScopeKey(_ scopeKey: String) {
+    self.scopeKey = scopeKey
   }
 }

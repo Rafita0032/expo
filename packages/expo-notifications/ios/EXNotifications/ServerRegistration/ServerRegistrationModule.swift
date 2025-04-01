@@ -4,7 +4,7 @@ import ExpoModulesCore
 import UIKit
 import MachO
 
-open class ServerRegistrationModule: Module {
+open class ServerRegistrationModule: Module, ExpoGoNotificationsModule {
   public func definition() -> ModuleDefinition {
     Name("NotificationsServerRegistrationModule")
 
@@ -176,4 +176,11 @@ open class ServerRegistrationModule: Module {
   private let kEXDeviceInstallationUUIDLegacyKey = "EXDeviceInstallationUUIDKey"
   private let kEXRegistrationInfoKey = "EXNotificationRegistrationInfoKey"
   private let CFTrue = true as CFBoolean
+
+  // MARK: - ExpoGoNotificationsModule protocol
+  private var scopeKey: String?
+
+  public func setScopeKey(_ scopeKey: String) {
+    self.scopeKey = scopeKey
+  }
 }

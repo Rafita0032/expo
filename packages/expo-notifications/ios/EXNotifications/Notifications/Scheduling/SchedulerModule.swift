@@ -20,7 +20,7 @@ let calendarNotificationTriggerComponentsKey = "value"
 let calendarNotificationTriggerTimezoneKey = "timezone"
 // swiftlint:enable identifier_name
 
-open class SchedulerModule: Module {
+open class SchedulerModule: Module, ExpoGoNotificationsModule {
   public func definition() -> ModuleDefinition {
     Name("ExpoNotificationScheduler")
 
@@ -147,5 +147,12 @@ open class SchedulerModule: Module {
       content: requestContentRecord.toUNMutableNotificationContent(),
       trigger: triggerFromParams(triggerInput, appContext: appContext)
     )
+  }
+
+  // MARK: - ExpoGoNotificationsModule protocol
+  private var scopeKey: String?
+
+  public func setScopeKey(_ scopeKey: String) {
+    self.scopeKey = scopeKey
   }
 }

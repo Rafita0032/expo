@@ -4,7 +4,7 @@ import ExpoModulesCore
 import UIKit
 import MachO
 
-open class PresentationModule: Module, NotificationDelegate {
+open class PresentationModule: Module, NotificationDelegate, ExpoGoNotificationsModule {
   var presentedNotifications: Set<String> = []
 
   public func definition() -> ModuleDefinition {
@@ -79,5 +79,12 @@ open class PresentationModule: Module, NotificationDelegate {
       // TODO: convert serialization to Records
       return EXNotificationSerializer.serializedNotification(notification)
     }
+  }
+
+  // MARK: - ExpoGoNotificationsModule protocol
+  private var scopeKey: String?
+
+  public func setScopeKey(_ scopeKey: String) {
+    self.scopeKey = scopeKey
   }
 }

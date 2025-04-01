@@ -4,7 +4,7 @@ import ExpoModulesCore
 import UIKit
 import MachO
 
-open class CategoriesModule: Module {
+open class CategoriesModule: Module, ExpoGoNotificationsModule {
   public func definition() -> ModuleDefinition {
     Name("ExpoNotificationCategoriesModule")
 
@@ -44,5 +44,12 @@ open class CategoriesModule: Module {
         promise.resolve(didDelete)
       }
     }
+  }
+
+  // MARK: - ExpoGoNotificationsModule protocol
+  private var scopeKey: String?
+
+  public func setScopeKey(_ scopeKey: String) {
+    self.scopeKey = scopeKey
   }
 }

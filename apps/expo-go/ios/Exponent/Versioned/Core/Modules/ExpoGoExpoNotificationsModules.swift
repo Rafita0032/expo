@@ -3,16 +3,14 @@
 import ExpoModulesCore
 import EXNotifications
 
-public final class ExpoGoNotificationsEmitterModule: EmitterModule {
-  private let scopeKey: String
+public final class ExpoGoNotificationsCategoriesModule: CategoriesModule {
   // swiftlint:disable:next unavailable_function
   required init(appContext: AppContext) {
     fatalError("Initializer not implemented, use init(appContext:scopeKey:) instead")
   }
 
   required init(appContext: AppContext, scopeKey: String) {
-    self.scopeKey = scopeKey
-
     super.init(appContext: appContext)
+    setScopeKey(scopeKey)
   }
 }

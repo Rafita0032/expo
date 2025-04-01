@@ -7,7 +7,7 @@ import MachO
 let onHandleNotification = "onHandleNotification"
 let onHandleNotificationTimeout = "onHandleNotificationTimeout"
 
-open class HandlerModule: Module, NotificationDelegate, SingleNotificationHandlerTaskDelegate {
+open class HandlerModule: Module, NotificationDelegate, SingleNotificationHandlerTaskDelegate, ExpoGoNotificationsModule {
   var tasksMap: [String: SingleNotificationHandlerTask] = [:]
 
   public func definition() -> ModuleDefinition {
@@ -63,5 +63,12 @@ open class HandlerModule: Module, NotificationDelegate, SingleNotificationHandle
       "id": notification.request.identifier,
       "notification": EXNotificationSerializer.serializedNotification(notification)
     ])
+  }
+
+  // MARK: - ExpoGoNotificationsModule protocol
+  private var scopeKey: String?
+
+  public func setScopeKey(_ scopeKey: String) {
+    self.scopeKey = scopeKey
   }
 }
