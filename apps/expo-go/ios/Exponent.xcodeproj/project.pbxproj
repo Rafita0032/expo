@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,7 @@
 		24C3B781E40BA87F7702303B /* libPods-ExponentIntegrationTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D607CBE135ED3708B0B19DD3 /* libPods-ExponentIntegrationTests.a */; };
 		25742BE72174B8BE003E7453 /* EXExpoUserNotificationCenterProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 25742BE62174B8BE003E7453 /* EXExpoUserNotificationCenterProxy.m */; };
 		28F885A428FEC26000CFD75C /* EXTextDirectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F885A328FEC26000CFD75C /* EXTextDirectionController.swift */; };
+		2D0DDB482D9C7AC000FAF708 /* ExpoGoExpoNotificationsModules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0DDB402D9C7AC000FAF708 /* ExpoGoExpoNotificationsModules.swift */; };
 		2D5265EB294998B5001BB2BB /* EXDevelopmentHomeLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5265EA294998B5001BB2BB /* EXDevelopmentHomeLoader.m */; };
 		31361A5A2260B2F600662769 /* EXScopedSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 31361A592260B2F600662769 /* EXScopedSecureStore.m */; };
 		31361A612261C65A00662769 /* EXPermissionsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 31361A602261C65A00662769 /* EXPermissionsManager.m */; };
@@ -218,6 +219,7 @@
 		25742BE62174B8BE003E7453 /* EXExpoUserNotificationCenterProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EXExpoUserNotificationCenterProxy.m; sourceTree = "<group>"; };
 		265F3243A214713066396657 /* Pods-Expo Go (main)-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Expo Go (main)-Tests.release.xcconfig"; path = "Target Support Files/Pods-Expo Go (main)-Tests/Pods-Expo Go (main)-Tests.release.xcconfig"; sourceTree = "<group>"; };
 		28F885A328FEC26000CFD75C /* EXTextDirectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EXTextDirectionController.swift; sourceTree = "<group>"; };
+		2D0DDB402D9C7AC000FAF708 /* ExpoGoExpoNotificationsModules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpoGoExpoNotificationsModules.swift; sourceTree = "<group>"; };
 		2D5265E9294998B5001BB2BB /* EXDevelopmentHomeLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EXDevelopmentHomeLoader.h; sourceTree = "<group>"; };
 		2D5265EA294998B5001BB2BB /* EXDevelopmentHomeLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EXDevelopmentHomeLoader.m; sourceTree = "<group>"; };
 		31361A582260B2F600662769 /* EXScopedSecureStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EXScopedSecureStore.h; sourceTree = "<group>"; };
@@ -488,10 +490,6 @@
 		FCF6D36F25B34BC200808BF5 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		FCF6D37125B34BC200808BF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		2D1A6CC92D9B38910007E94A /* Notifications */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Notifications; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		78CEE2BD1ACD07D70095B124 /* Frameworks */ = {
@@ -1194,7 +1192,7 @@
 		F138E0D42A5F2071002E15BC /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				2D1A6CC92D9B38910007E94A /* Notifications */,
+				2D0DDB402D9C7AC000FAF708 /* ExpoGoExpoNotificationsModules.swift */,
 				F138E0D52A5F2090002E15BC /* ExpoGoModule.swift */,
 				B248B8802AD88337003C9C10 /* ExpoGoExpoUpdatesModule.swift */,
 			);
@@ -1234,9 +1232,6 @@
 			);
 			dependencies = (
 				FCF6D37325B34BC200808BF5 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				2D1A6CC92D9B38910007E94A /* Notifications */,
 			);
 			name = "Expo Go";
 			productName = Exponent;
@@ -1934,6 +1929,7 @@
 				B2A8E25F2CBF3B24004CA9AF /* EXApiUtil.swift in Sources */,
 				B58F125C20B73455003E13F1 /* EXEnvironment.m in Sources */,
 				B5AC39AF1E95A90B00540AA7 /* EXVersions.m in Sources */,
+				2D0DDB482D9C7AC000FAF708 /* ExpoGoExpoNotificationsModules.swift in Sources */,
 				B56C65C8204768F3002B2424 /* EXHomeAppManager.m in Sources */,
 				B2E2CCCA2AA7DAD400E2260C /* ManifestAndAssetRequestHeaders.swift in Sources */,
 				F108698B2448B11D00B7DC04 /* EXDevMenuMotionInterceptor.m in Sources */,
